@@ -1,0 +1,58 @@
+<h1>لوحة التحكم</h1>
+
+<div id="servers"></div>
+
+<script>
+const params = new URLSearchParams(location.search);
+const user = params.get("user");
+
+fetch("/users.json")
+  .then(r => r.json())
+  .then(data => {
+    const u = data.find(x => x.username === user);
+    const box = document.getElementById("servers");
+
+    u.servers.forEach(s => {
+      box.innerHTML += `
+        <div class="card">
+          <h3>${s.type} - ${s.id}</h3>
+          <p>الحالة: ${s.status}</p>
+          <button>تشغيل</button>
+          <button>إيقاف</button>
+        </div>
+      `;
+    });
+  });
+</script>
+<h1>لوحة التحكم</h1>
+
+<div id="srv"></div>
+
+<button onclick="logout()">تسجيل خروج</button>
+
+<script>
+const s = localStorage.getItem("service");
+if(s){
+  srv.innerHTML = `
+    <div class="card">
+      <h3>${s} Server</h3>
+      <p>الحالة: Active</p>
+      <button>تشغيل</button>
+      <button>إيقاف</button>
+      <button>إعادة تشغيل</button>
+    </div>`;
+}else{
+  srv.innerHTML = "لا توجد خدمات";
+}
+
+function logout(){
+  localStorage.removeItem("logged");
+  location.href="login.html";
+}
+</script>
+
+<script>
+if(localStorage.getItem("logged") !== "yes"){
+  location.href="login.html";
+}
+</script>

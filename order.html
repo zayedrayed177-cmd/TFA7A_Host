@@ -1,0 +1,20 @@
+<select id="service">
+  <option>FiveM</option>
+  <option>VPS</option>
+</select>
+
+<button onclick="buy()">شراء</button>
+
+<script>
+function buy(){
+  localStorage.setItem("service", service.value);
+  alert("تم الطلب");
+  location.href="dashboard.html";
+}
+</script>
+
+<script>
+if(localStorage.getItem("logged") !== "yes"){
+  location.href="login.html";
+}
+</script>
