@@ -1,0 +1,16 @@
+<h2>إنشاء حساب</h2>
+<form action="/register" method="POST">
+  <input name="username" placeholder="اسم المستخدم" required>
+  <input name="password" type="password" placeholder="كلمة المرور" required>
+  <button>تسجيل</button>
+</form>
+
+app.post("/login", async (req, res) => {
+  const user = users.find(u => u.username === req.body.username);
+  if (!user) return res.send("خطأ");
+
+  const ok = await bcrypt.compare(req.body.password, user.password);
+  if (!ok) return res.send("كلمة المرور خاطئة");
+
+  res.redirect("/dashboard.html?user=" + user.username);
+});

@@ -1,0 +1,13 @@
+[
+  {
+    "username": "test",
+    "password": "HASHED_PASSWORD",
+    "servers": [
+      {
+        "id": "srv-001",
+        "type": "FiveM",
+        "status": "Offline"
+      }
+    ]
+  }
+]

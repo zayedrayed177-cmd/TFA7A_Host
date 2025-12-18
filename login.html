@@ -1,0 +1,19 @@
+<h2>تسجيل دخول</h2>
+<form action="/login" method="POST">
+  <input name="username" required>
+  <input name="password" type="password" required>
+  <button>دخول</button>
+</form>
+
+app.post("/register", async (req, res) => {
+  const hash = await bcrypt.hash(req.body.password, 10);
+
+  users.push({
+    username: req.body.username,
+    password: hash,
+    servers: []
+  });
+
+  fs.writeFileSync("users.json", JSON.stringify(users, null, 2));
+  res.redirect("/login.html");
+});

@@ -1,0 +1,26 @@
+<h1>لوحة التحكم</h1>
+
+<div id="servers"></div>
+
+<script>
+const params = new URLSearchParams(location.search);
+const user = params.get("user");
+
+fetch("/users.json")
+  .then(r => r.json())
+  .then(data => {
+    const u = data.find(x => x.username === user);
+    const box = document.getElementById("servers");
+
+    u.servers.forEach(s => {
+      box.innerHTML += `
+        <div class="card">
+          <h3>${s.type} - ${s.id}</h3>
+          <p>الحالة: ${s.status}</p>
+          <button>تشغيل</button>
+          <button>إيقاف</button>
+        </div>
+      `;
+    });
+  });
+</script>
